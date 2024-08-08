@@ -32,9 +32,11 @@ const adminNavigation = [
   { name: "Dashboard", href: "/dashboard/admin", icon: HomeIcon },
   { name: "Users", href: "/users/instructor", icon: UsersIcon },
   { name: "Courses", href: "/admin/courses", icon: DocumentDuplicateIcon },
+  { name: "Blogs", href: "/admin/blogs", icon: DocumentDuplicateIcon },
   { name: "Reports", href: "/attendance/reports/child", icon: ChartPieIcon },
   { name: "Take Attendance", href: "/attendance/child", icon: ChartPieIcon },
   { name: "Grant Access", href: "/access/permissions", icon: CalendarIcon },
+  { name: "Notifications", href: "/notifications", icon: BellIcon },
 ];
 
 const childNavigation = [
@@ -50,6 +52,7 @@ const parentNavigation = [
   { name: "Enrolled Courses", href: "/inrolled/courses", icon: UsersIcon },
   { name: "Attendance Reports", href: "/attendance/reports", icon: DocumentDuplicateIcon },
   { name: "Certificates", href: "/certificates", icon: ChartPieIcon },
+ 
   { name: "Notes", href: "/notes", icon: ChartPieIcon },
 ];
 

@@ -14,6 +14,8 @@ const enrollmentsRoutes = require('./routes/enrollmentRoutes');
 const reviewRoutes = require('./routes/reviewRouets')
 const accessRoutes = require('./routes/accessRoutes')
 const feeRoutes = require('./routes/feeRoutes');
+const notificationsRoutes = require('./routes/notificationRoutes')
+const blogRoutes = require('./routes/blogRoutes')
 // Middleware starts here
 dotenv.config();
 const app = experss();
@@ -36,6 +38,8 @@ app.use("/api/v1/reviews", reviewRoutes);
 app.use("/api/v1/permissions", accessRoutes);
 app.use("/api/v1/enrollments", enrollmentsRoutes);
 app.use("/api/v1/fee", feeRoutes);
+app.use("/api/v1", notificationsRoutes);
+app.use("/api/v1", blogRoutes);
 // app.use("/api/v1/enrollments", enrollmentRequestRoutes);
 
 

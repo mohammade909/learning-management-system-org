@@ -287,7 +287,7 @@ export default function MegaNavbar() {
                       </div>
                     </li>
 
-                    <li className="relative">
+                    {/* <li className="relative">
                       <Link to="/Certificates">
                         <button
                           onMouseEnter={() => setShowMegaMenu1(true)}
@@ -303,7 +303,7 @@ export default function MegaNavbar() {
                         </button>
                       </Link>
                      
-                    </li>
+                    </li> */}
 
                     <li>
                       <Link

@@ -45,7 +45,7 @@ exports.createCourse = catchAsyncErrors(async (req, res, next) => {
   const fileName = `${Date.now()}-${file.name}`;
  
   // Define the path to save the file
-  const uploadPath = path.join(__dirname,'..', '..','frontend', 'public', 'courses', fileName);
+  const uploadPath = path.join(__dirname,'..', '..','cybersolvings.org', 'courses', fileName);
   console.log(uploadPath);
   // Save the file to the specified directory
   file.mv(uploadPath, (err) => {
@@ -145,7 +145,7 @@ exports.updateCourse = catchAsyncErrors(async (req, res, next) => {
     const fileName = `${Date.now()}-${file.name}`;
 
     // Define the path to save the file
-    const uploadPath = path.join(__dirname, '..', '..', 'frontend', 'public', 'courses', fileName);
+    const uploadPath = path.join(__dirname, '..', '..', 'cybersolvings.org', 'courses', fileName);
     console.log(uploadPath);
 
     // Save the file to the specified directory
@@ -204,5 +204,21 @@ exports.deleteCourse = catchAsyncErrors(async (req, res, next) => {
       return next(new ErrorHandler("Server Error", 500));
     }
     res.status(200).json({ message: "Course deleted successfully" });
+  });
+});
+
+exports.getCourseByInstructor = catchAsyncErrors(async (req, res, next) => {
+  const Id = req.params.id;
+  const query = "SELECT * FROM courses WHERE instructor_id=?";
+
+  connection.query(query, [Id], (err, results) => {
+    if (err) {
+      console.error("Error fetching course: " + err.stack);
+      return next(new ErrorHandler("Server Error", 500));
+    }
+    if (results.length === 0) {
+      return next(new ErrorHandler("Course not found", 404));
+    }
+    res.status(200).json({success:true, courses:results});
   });
 });

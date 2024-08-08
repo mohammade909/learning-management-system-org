@@ -12,16 +12,20 @@ import leaveReducer from "./leaveSlice";
 import reviewReducer from "./reviewSlice";
 import permissionsReducer from './permissionsSlice';
 import enrollmentReducer from "./enrollmentSlice";
+import notificationReducer from "./notificationSlice";
+import blogReducer from "./blogSlice";
 
 const rootReducer = combineReducers({
   auth: authReducer,
   users: usersReducer,
   courses: courseReducer,
+  blogs: blogReducer,
   attendance: attendanceReducer,
   leaves: leaveReducer,
   reviews: reviewReducer,
   enrollments:enrollmentReducer,
-  permissions: permissionsReducer // Add any other reducers here.
+  permissions: permissionsReducer,
+  notifications:notificationReducer // Add any other reducers here.
 });
 
 const persistConfig = {

@@ -55,9 +55,9 @@ const Footer = () => {
               </Link></li>
             <li><Link to="/contact" className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Contact
                 </Link></li>
-            <li><Link to="/" className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Privacy Policy
+            <li><Link to="/privacy-policy" className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Privacy Policy
               </Link></li>
-            <li><Link to="/" className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Terms & Conditions
+            <li><Link to="/tearms-conditions" className="text-base font-normal text-gray-400 whitespace-nowrap transition-all duration-300 hover:text-amber-400 focus-within:outline-0 focus-within:text-amber-400">Terms & Conditions
                 </Link></li>
           </ul>
         </div>

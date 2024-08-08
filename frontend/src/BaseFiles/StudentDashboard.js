@@ -25,8 +25,8 @@ import { updateUser } from "../actions/auth";
 import { ToastContainer, toast } from "react-toastify";
 import Spinner from "./Spinner";
 import Certificate from "../Child/Certificate";
-import {getUserPermissions} from '../AccessControl/actions/accessControl'
-
+import { getUserPermissions } from "../AccessControl/actions/accessControl";
+import { getNotificationsByUser } from "../redux/notificationSlice";
 const navigation = [
   { name: "Projects", href: "#", icon: FolderIcon, current: false },
   { name: "Deployments", href: "#", icon: ServerIcon, current: false },
@@ -50,9 +50,6 @@ const tabNavigation = [
   { name: "Reports", href: "reports", current: false },
 ];
 
-
-
-
 function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
@@ -61,26 +58,32 @@ export default function StudentDashboard() {
   const [sidebarOpen, setSidebarOpen] = useState(false);
   const [activeTab, setActiveTab] = useState("account");
   const { auth, token } = useSelector((state) => state.auth);
-  const {userPermissions} = useSelector((state)=>state.permissions)
-  const dispatch = useDispatch()
+  const { userPermissions } = useSelector((state) => state.permissions);
+  const { notifications } = useSelector((state) => state.notifications);
+  const dispatch = useDispatch();
   const handleLogout = () => {
     localStorage.clear();
     window.location.href = "/login";
   };
-  useEffect(()=>{
-    dispatch(getUserPermissions({userId:auth?.user_id, token}))
-  },[])
+  useEffect(() => {
+    dispatch(getUserPermissions({ userId: auth?.user_id, token }));
+    dispatch(getNotificationsByUser(auth?.user_id));
+  }, []);
 
-
-  const secondaryNavigation = tabNavigation.filter(navItem => {
+  const secondaryNavigation = tabNavigation.filter((navItem) => {
     const permissionKey = navItem.name.toLowerCase().replace(" ", "");
-   
-    
-    const permissions = userPermissions[permissionKey];
-    console.log(permissions);
-    
-    // Check if the permissions exist and include "read" permission
-    return Array.isArray(permissions) && permissions.includes("read");
+
+    const permissionsString = userPermissions[permissionKey];
+    if (permissionsString) {
+      try {
+        const permissions = JSON.parse(permissionsString);
+        return Array.isArray(permissions) && permissions.includes("read");
+      } catch (e) {
+        console.error(`Error parsing permissions for ${permissionKey}:`, e);
+        return false;
+      }
+    }
+    return false;
   });
 
   return (
@@ -389,6 +392,16 @@ export default function StudentDashboard() {
                 </nav>
               </div>
 
+              {notifications.map((item, index) => (
+                <div
+                  key={index}
+                  class="bg-orange-100 border-l-4 border-orange-500 text-orange-700 p-4"
+                  role="alert"
+                >
+                  <p class="font-bold">{item.title}</p>
+                  <p>{item.message}</p>
+                </div>
+              ))}
               <div>
                 {activeTab === "account" && <Account />}
                 {activeTab === "enrollment" && <Enrollment />}

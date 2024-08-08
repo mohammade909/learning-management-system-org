@@ -1,10 +1,10 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import {BASEURL} from '../baseurl'
-export const getCourses = createAsyncThunk(
-  "course/getCourses",
+export const getBlogs = createAsyncThunk(
+  "blog/getBlogs",
   async (_, thunkAPI) => {
     try {
-      const response = await fetch(`${BASEURL}/api/v1/courses`, {
+      const response = await fetch(`${BASEURL}/api/v1/blogs`, {
         method: "GET",
         headers: {
           "Content-Type": "application/json",
@@ -27,19 +27,17 @@ export const getCourses = createAsyncThunk(
   }
 );
 
-export const addCourse = createAsyncThunk(
-  "staff/addCourse",
+export const createBlog = createAsyncThunk(
+  "blog/createBlog",
   async (values, thunkAPI) => {
     try {
-      // Create a FormData object to hold the form values and file
       const formData = new FormData();
       for (const key in values) {
         formData.append(key, values[key]);
       }
 
-      const response = await fetch(`${BASEURL}/api/v1/courses`, {
+      const response = await fetch(`${BASEURL}/api/v1/blogs`, {
         method: "POST",
-        // Do not set Content-Type to application/json when using FormData
         body: formData,
       });
 
@@ -60,11 +58,11 @@ export const addCourse = createAsyncThunk(
 );
 // Example asynchronous thunk to get students
 
-export const getcourseById = createAsyncThunk(
-  "course/getCourseById",
-  async (course_id, thunkAPI) => {
+export const getBlogById = createAsyncThunk(
+  "blog/getBlogById",
+  async (blog_id, thunkAPI) => {
     try {
-      const response = await fetch(`${BASEURL}/api/v1/courses/${course_id}`);
+      const response = await fetch(`${BASEURL}/api/v1/blogs/${blog_id}`);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -81,11 +79,12 @@ export const getcourseById = createAsyncThunk(
     }
   }
 );
-export const getcourseByInstructor = createAsyncThunk(
-  "course/getcourseByInstructor",
-  async (instructor_id, thunkAPI) => {
+
+export const getblogByUser = createAsyncThunk(
+  "blog/getblogByUser",
+  async (id, thunkAPI) => {
     try {
-      const response = await fetch(`${BASEURL}/api/v1/courses/instructor/${instructor_id}`);
+      const response = await fetch(`${BASEURL}/api/v1/blogs/user/${id}`);
 
       if (!response.ok) {
         const errorData = await response.json();
@@ -104,13 +103,12 @@ export const getcourseByInstructor = createAsyncThunk(
 );
 
 // Example asynchronous thunk to delete student
-export const deleteCourse = createAsyncThunk(
-  "course/deleteCourse",
-  async (course_id, thunkAPI) => {
-    console.log(course_id);
+export const deleteBlog = createAsyncThunk(
+  "blog/deleteblog",
+  async (blog_id, thunkAPI) => {
     try {
       // Your asynchronous logic to delete student here
-      const response = await fetch(`${BASEURL}/api/v1/courses/${course_id}`, {
+      const response = await fetch(`${BASEURL}/api/v1/blogs/${blog_id}`, {
         method: "DELETE",
       });
 
@@ -120,7 +118,7 @@ export const deleteCourse = createAsyncThunk(
       }
       const data = await response.json();
       console.log(data);
-      return { course_id: course_id, message: data.message };
+      return { blog_id: blog_id, message: data.message };
     } catch (error) {
       // Handle error
       return thunkAPI.rejectWithValue({ error: error.message });
@@ -129,16 +127,16 @@ export const deleteCourse = createAsyncThunk(
 );
 
 // Example asynchronous thunk to update student
-export const updatecourse = createAsyncThunk(
-  "course/updateCourse",
-  async ({ course_id, updatedData }, thunkAPI) => {
+export const updateBlog = createAsyncThunk(
+  "blog/updateblog",
+  async ({ blog_id, updatedData }, thunkAPI) => {
     try {
       const formData = new FormData();
       for (const key in updatedData) {
         formData.append(key, updatedData[key]);
       }
       // Your asynchronous logic to update student here
-      const response = await fetch(`${BASEURL}/api/v1/courses/${course_id}`, {
+      const response = await fetch(`${BASEURL}/api/v1/blogs/${blog_id}`, {
         method: "PUT",
         body: formData,
       });

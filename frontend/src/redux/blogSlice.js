@@ -1,24 +1,24 @@
-// courseSlice.js
+// blogSlice.js
 import { createSlice } from "@reduxjs/toolkit";
 import {
-  getCourses,
-  addCourse,
-  getcourseById,
-  updatecourse,
-  deleteCourse,
-  getcourseByInstructor
-} from "../actions/course";
+  getBlogs,
+  createBlog,
+  getBlogById,
+  updateBlog,
+  deleteBlog,
+  getblogByUser
+} from "../actions/blog";
 
 const initialState = {
-  courses: [],
+  blogs: [],
   loading: false,
   error: null,
   message: null,
-  course: null,
+  blog: null,
 };
 
-const courseSlice = createSlice({
-  name: "course",
+const blogSlice = createSlice({
+  name: "blogs",
   initialState,
   reducers: {
     clearErrors: (state) => {
@@ -30,81 +30,81 @@ const courseSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(getCourses.pending, (state) => {
+      .addCase(getBlogs.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getCourses.fulfilled, (state, action) => {
+      .addCase(getBlogs.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.courses = action.payload;
+        state.blogs = action.payload.blogs;
       })
-      .addCase(getCourses.rejected, (state, action) => {
+      .addCase(getBlogs.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(getcourseByInstructor.pending, (state) => {
+      .addCase(getblogByUser.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getcourseByInstructor.fulfilled, (state, action) => {
+      .addCase(getblogByUser.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.courses = action.payload.courses;
+        state.blogs = action.payload.blogs;
       })
-      .addCase(getcourseByInstructor.rejected, (state, action) => {
+      .addCase(getblogByUser.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(getcourseById.pending, (state) => {
+      .addCase(getBlogById.pending, (state) => {
         state.loading = true;
       })
-      .addCase(getcourseById.fulfilled, (state, action) => {
+      .addCase(getBlogById.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
-        state.course = action.payload;
+        state.blog= action.payload.blog;
       })
-      .addCase(getcourseById.rejected, (state, action) => {
+      .addCase(getBlogById.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(addCourse.pending, (state) => {
+      .addCase(createBlog.pending, (state) => {
         state.loading = true;
       })
-      .addCase(addCourse.fulfilled, (state, action) => {
+      .addCase(createBlog.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.message = action.payload.message;
       })
-      .addCase(addCourse.rejected, (state, action) => {
+      .addCase(createBlog.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(updatecourse.pending, (state) => {
+      .addCase(updateBlog.pending, (state) => {
         state.loading = true;
       })
-      .addCase(updatecourse.fulfilled, (state, action) => {
+      .addCase(updateBlog.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.message = action.payload.message;
       })
-      .addCase(updatecourse.rejected, (state, action) => {
+      .addCase(updateBlog.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       })
-      .addCase(deleteCourse.pending, (state) => {
+      .addCase(deleteBlog.pending, (state) => {
         state.loading = true;
       })
-      .addCase(deleteCourse.fulfilled, (state, action) => {
+      .addCase(deleteBlog.fulfilled, (state, action) => {
         state.loading = false;
         state.error = null;
         state.message = action.payload.message;
       })
-      .addCase(deleteCourse.rejected, (state, action) => {
+      .addCase(deleteBlog.rejected, (state, action) => {
         state.loading = false;
         state.error = action.payload;
       });
   },
 });
 
-export const { clearErrors, clearMessage } = courseSlice.actions;
+export const { clearErrors, clearMessage } = blogSlice.actions;
 
-export default courseSlice.reducer;
+export default blogSlice.reducer;
