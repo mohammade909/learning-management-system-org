@@ -8,7 +8,7 @@ const Product = () => {
     <div className="mx-auto max-w-2xl lg:max-w-none">
     <div className="text-center">
             <span className="bg-white px-3 text-4xl leading-normal font-bold text-gray-900">
-            Heping Business Globally
+            Helping Business Globally
             </span>
             <p className="hidden text-gray-500 dark:text-gray-300 md:block pt-2 text-center">
             Transform your digital presence and reach customers worldwide through expert web design.</p>

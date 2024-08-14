@@ -5,6 +5,7 @@ export const ActionConfirm = ({ isClose,ActionFunction, id , action}) => {
     const dispatch = useDispatch()
   const handleAction =()=>{
       dispatch(ActionFunction(id))
+      
       isClose()
   }
   return (

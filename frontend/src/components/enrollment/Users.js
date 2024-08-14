@@ -37,7 +37,7 @@ const Users = () => {
 
   const handleSave = (userId) => {
     const updatedUser = updatedStatuses[userId];
-    
+
     if (updatedUser) {
       dispatch(updateUserStatus({ userId, updatedData: updatedUser }));
     }
@@ -119,9 +119,6 @@ const Users = () => {
         return (
           <>
             <th scope="col" className="px-6 py-3">
-              User Id
-            </th>
-            <th scope="col" className="px-6 py-3">
               User Name
             </th>
             <th scope="col" className="px-6 py-3">
@@ -172,7 +169,11 @@ const Users = () => {
                   )} px-3 py-2`}
                   value={getUserStatus(user, updatedStatuses, "login_status")}
                   onChange={(e) =>
-                    handleStatusChange(user.user_id, "login_status", e.target.value)
+                    handleStatusChange(
+                      user.user_id,
+                      "login_status",
+                      e.target.value
+                    )
                   }
                 >
                   {statusOptions.map((option) => (
@@ -229,7 +230,11 @@ const Users = () => {
                   )} px-3 py-2`}
                   value={getUserStatus(user, updatedStatuses, "login_status")}
                   onChange={(e) =>
-                    handleStatusChange(user.user_id, "login_status", e.target.value)
+                    handleStatusChange(
+                      user.user_id,
+                      "login_status",
+                      e.target.value
+                    )
                   }
                 >
                   {statusOptions.map((option) => (
@@ -268,12 +273,6 @@ const Users = () => {
               key={user.email}
               className="odd:bg-white odd:dark:bg-gray-900 even:bg-gray-50 even:dark:bg-gray-800 border-b dark:border-gray-700"
             >
-              <th
-                scope="row"
-                className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white"
-              >
-                {user.user_id}
-              </th>
               <td className="px-6 py-4 font-medium text-gray-900 whitespace-nowrap dark:text-white">
                 {user.username}
               </td>
@@ -287,7 +286,11 @@ const Users = () => {
                   )} px-3 py-2`}
                   value={getUserStatus(user, updatedStatuses, "login_status")}
                   onChange={(e) =>
-                    handleStatusChange(user.user_id, "login_status", e.target.value)
+                    handleStatusChange(
+                      user.user_id,
+                      "login_status",
+                      e.target.value
+                    )
                   }
                 >
                   {statusOptions.map((option) => (
@@ -324,7 +327,6 @@ const Users = () => {
       }
     });
   };
-  
 
   return (
     <>

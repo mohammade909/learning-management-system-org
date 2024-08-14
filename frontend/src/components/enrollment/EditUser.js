@@ -4,10 +4,10 @@ import { getUserById, updateUser } from "../../actions/user";
 import { useSelector, useDispatch } from "react-redux";
 import { useParams } from "react-router-dom";
 import Enrollments from "../../pages/Enrollments";
-
+import ManageCourse from "../course/ManageCourse";
 const UpdateUserForm = () => {
   const [activeTab, setActiveTab] = useState("form");
-
+  const [isOpen , setIsOpen] = useState(false)
   const handleTabClick = (tab) => {
     setActiveTab(tab);
   };
@@ -50,6 +50,16 @@ const UpdateUserForm = () => {
               }`}
             >
               Update User
+            </button>
+            <button
+              onClick={() => handleTabClick("manage")}
+              className={`py-2 px-4 font-semibold ${
+                activeTab === "manage"
+                  ? "border-b-2 border-blue-500 text-blue-500"
+                  : "text-gray-600"
+              }`}
+            >
+              Manage
             </button>
             <button
               onClick={() => handleTabClick("enrollments")}
@@ -269,6 +279,7 @@ const UpdateUserForm = () => {
             </Formik>
           )}
           {activeTab === "enrollments" && <Enrollments id={id} />}
+          {activeTab === "manage" && <ManageCourse isOpen={isOpen} setIsOpen={setIsOpen} />}
         </div>
       </div>
     </>

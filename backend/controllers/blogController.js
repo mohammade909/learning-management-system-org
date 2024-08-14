@@ -42,7 +42,7 @@ exports.createBlog = catchAsyncErrors(async (req, res, next) => {
   const fileName = `${Date.now()}-${file.name}`;
 
   // Define the path to save the file
-  const uploadPath = path.join(__dirname, '..','..', 'frontend', 'public', 'blogs', fileName);
+  const uploadPath = path.join(__dirname, '..','..', 'frontend','public', 'blogs', fileName);
   
   // Save the file to the specified directory
   file.mv(uploadPath, (err) => {
@@ -149,7 +149,7 @@ exports.updateBlog = catchAsyncErrors(async (req, res, next) => {
     const fileName = `${Date.now()}-${file.name}`;
 
     // Define the path to save the file
-    const uploadPath = path.join(__dirname,'..', '..','cybersolvings.org', 'courses', fileName);
+    const uploadPath = path.join(__dirname,'..', '..','frontend', 'public', 'blogs', fileName);
     console.log(uploadPath);
 
     // Save the file to the specified directory

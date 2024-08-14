@@ -222,3 +222,30 @@ exports.getCourseByInstructor = catchAsyncErrors(async (req, res, next) => {
     res.status(200).json({success:true, courses:results});
   });
 });
+
+
+exports.assignCourseToInstructor = catchAsyncErrors(async (req, res, next) => {
+  const { course_id, instructor_id } = req.body;
+  console.log(req.body);
+  
+  const instructorCheckQuery = "SELECT * FROM users WHERE user_id=? AND user_type='instructor'";
+  connection.query(instructorCheckQuery, [instructor_id], (err, results) => {
+    if (err) {
+      console.error("Error checking instructor: " + err.stack);
+      return next(new ErrorHandler("Server Error", 500));
+    }
+    if (results.length === 0) {
+      return next(new ErrorHandler("Instructor not found", 404));
+    }
+
+    // Update course with instructor_id
+    const updateQuery = "UPDATE courses SET instructor_id=? WHERE course_id=?";
+    connection.query(updateQuery, [instructor_id, course_id], (err, results) => {
+      if (err) {
+        console.error("Error assigning instructor to course: " + err.stack);
+        return next(new ErrorHandler("Server Error", 500));
+      }
+      res.status(200).json({ message: "Course assigned to instructor successfully" });
+    });
+  });
+});

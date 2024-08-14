@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from "react-redux";
 import SuccessAlert from '../../BaseFiles/SuccessAlert';
 import ErrorAlert from '../../BaseFiles/ErrorAlert';
 import { clearErrors, clearMessage } from '../../redux/blogSlice';
-
+import Spinner from '../../BaseFiles/Spinner'
 const CreateBlog = () => {
   const { loading, error, message } = useSelector((state) => state.blogs);
   const { auth } = useSelector((state) => state.auth);
@@ -173,7 +173,7 @@ const CreateBlog = () => {
                 type="submit"
                 className="w-full p-2 bg-blue-500 text-white rounded"
               >
-                Submit
+          {loading ? <Spinner/> : 'Submit'}
               </button>
             </Form>
           )}
